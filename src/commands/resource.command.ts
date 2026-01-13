@@ -1,8 +1,10 @@
 import { Command } from 'commander';
 import path from 'path';
 import chalk from 'chalk';
-import { createDirectory, createFile } from '../utils/file-system';
-import { controllerTemplate, serviceTemplate, typesTemplate } from '../templates/resource'; // Adjust imports based on your structure
+import { createDirectory, createFile } from '../utils/file-system.js';
+import { validateName, toPascalCase } from '../utils/validation.js';
+import { handleError } from '../utils/errors.js';
+import { controllerTemplate, serviceTemplate, typesTemplate } from '../templates/resource/index.js';
 
 /**
  * Registers the 'resource' command to the Commander program.
@@ -19,31 +21,31 @@ export function loadResourceCommand(program: Command) {
         .command('resource <name>')
         .alias('r')
         .description('Generate a Resource (Controller, Service, Types)')
-        .action((name: string) => {
+        .action((rawName: string) => {
             // Convert "user" -> "User"
-            const pascalName = name.charAt(0).toUpperCase() + name.slice(1);
-            const lowerName = name.toLowerCase();
+            const name = validateName(rawName);
+            const pascalName = toPascalCase(name);
+            const fileName = name.toLowerCase();
 
             console.log(chalk.blue(`Generating Resource: ${pascalName}...`));
 
             // Target path: src/resources/<name>
-            const targetDir = path.join(process.cwd(), 'src', 'resources', lowerName);
+            const targetDir = path.join(process.cwd(), 'src', 'resources', fileName);
 
             const created = createDirectory(targetDir);
             if (!created) {
-                console.error(chalk.red(`Resource "${lowerName}" already exists!`));
+                console.error(chalk.red(`Resource "${fileName}" already exists!`));
                 process.exit(1);
             }
 
             try {
-                createFile(targetDir, `${lowerName}.types.ts`, typesTemplate(pascalName));
-                createFile(targetDir, `${lowerName}.service.ts`, serviceTemplate(pascalName));
-                createFile(targetDir, `${lowerName}.controller.ts`, controllerTemplate(pascalName));
+                createFile(targetDir, `${fileName}.types.ts`, typesTemplate(pascalName));
+                createFile(targetDir, `${fileName}.service.ts`, serviceTemplate(pascalName));
+                createFile(targetDir, `${fileName}.controller.ts`, controllerTemplate(pascalName));
 
-                console.log(chalk.green(`\n Resource generated successfully in: src/resources/${lowerName}/`));
+                console.log(chalk.green(`\n Resource generated successfully in: src/resources/${fileName}/`));
             } catch (error) {
-                console.error(chalk.red(' Critical error during generation.'), error);
-                process.exit(1);
+                handleError(error);
             }
         });
 }

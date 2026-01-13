@@ -1,7 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Main Entry Point for MyGen CLI.
+ * Registers all available commands and parses arguments.
+ */
 import { Command } from 'commander';
-import { loadResourceCommand } from './commands/resource.command';
-import { loadEntityCommand } from './commands/entity.command';
+import { loadResourceCommand } from './commands/resource.command.js';
+import { loadEntityCommand } from './commands/entity.command.js';
 
 const program = new Command();
 

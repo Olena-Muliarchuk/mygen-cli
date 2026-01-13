@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
-        "module": "CommonJS",
-        "moduleResolution": "node",
+        "target": "ES2022",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "rootDir": "./src",
         "outDir": "./dist",
 
@@ -14,6 +14,9 @@
         "resolveJsonModule": true /* Дозволяє імпортувати package.json */,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
+    },
+    "ts-node": {
+        "esm": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "dist"]

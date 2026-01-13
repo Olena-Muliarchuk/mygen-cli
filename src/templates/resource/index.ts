@@ -1,3 +1,3 @@
-export { controllerTemplate } from './controller';
-export { serviceTemplate } from './service';
-export { typesTemplate } from './types';
+export { controllerTemplate } from './controller.js';
+export { serviceTemplate } from './service.js';
+export { typesTemplate } from './types.js';

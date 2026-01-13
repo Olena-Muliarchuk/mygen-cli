@@ -2,13 +2,14 @@
     "name": "my-cli-tool",
     "version": "1.0.0",
     "description": "",
+    "type": "module",
     "main": "index.js",
     "bin": {
         "mygen": "./dist/index.js"
     },
     "scripts": {
         "start": "ts-node src/index.ts",
-        "build": "tsc",
+        "build": "tsc && node scripts/add-shebang.js",
         "lint": "eslint . --fix",
         "format": "prettier --write ."
     },

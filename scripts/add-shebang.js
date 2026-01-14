@@ -12,7 +12,7 @@ try {
         const content = fs.readFileSync(indexPath, 'utf-8');
         const shebang = '#!/usr/bin/env node\n';
 
-        if (!content.startsWith('#!/usr/bin/env node')) {
+        if (!content.startsWith('#!')) {
             fs.writeFileSync(indexPath, shebang + content, 'utf-8');
             console.log('Shebang added to dist/index.js');
         } else {

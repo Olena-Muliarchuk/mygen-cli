@@ -102,6 +102,24 @@ mygen e Product
 src/database/entities/product.entity.ts
 ```
 
+### 3. Generate a Frontend Project
+
+Creates a basic Vanilla JS boilerplate (HTML, CSS, JS).
+
+```bash
+mygen init MyWebsite
+# or shorthand
+mygen i MyWebsite
+```
+**Output:**
+
+```plaintext
+MyWebsite/
+├── index.html
+├── style.css
+└── script.js
+```
+
 ---
 
 ## Development

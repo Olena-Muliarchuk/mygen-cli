@@ -6,6 +6,7 @@
 import { Command } from 'commander';
 import { loadResourceCommand } from './commands/resource.command.js';
 import { loadEntityCommand } from './commands/entity.command.js';
+import { loadInitCommand } from './commands/init.command.js';
 
 const program = new Command();
 
@@ -16,6 +17,7 @@ program
 
 loadResourceCommand(program);
 loadEntityCommand(program);
+loadInitCommand(program);
 
 
 program.parse(process.argv);

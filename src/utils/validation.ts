@@ -11,7 +11,7 @@ export function validateName(name: string): string {
         throw new Error('Name cannot be empty');
     }
 
-    if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(name)) {
+    if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(name)) {
         throw new Error('Name must start with a letter and contain only letters, numbers, and underscores');
     }
 
